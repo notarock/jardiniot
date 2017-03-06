@@ -4,6 +4,9 @@
 * ----
 * Écrit par Aubert Guillemette
 *
+* version 0.2, 6 mars 2017
+*  -Ajout d'une fonction qui subscribe automatiquement
+*   à tous les sensors dans la base de données
 * version 0.1, 5 mars 2017
 *  -Première version
 */
@@ -16,14 +19,14 @@ const DEBUG = true;
 
 const MQTT_USERNAME = 'jardiniot';
 const MQTT_PASSWORD = 'jardiniot';
-const MQTT_IP       = '192.168.56.102';
+const MQTT_IP       = '192.168.56.101';
 const MQTT_PORT     = '1883';
 
-const PG_USER = 'jardiniot';
-const PG_PASS = 'jardiniot';
-const PG_DB   = 'jardiniot';
-const PG_IP   = 'localhost';
-const PG_PORT = '5432';
+const PG_USER       = 'jardiniot';
+const PG_PASS       = 'jardiniot';
+const PG_DB         = 'jardiniot';
+const PG_IP         = 'localhost';
+const PG_PORT       = '5432';
 
 //-----------------------------------------------------------------------------
 
@@ -50,20 +53,29 @@ var mqtt_client = mqtt.connect(MQTT_CONN_STR, MQTT_CREDS);
 
 //Callbacks!
 mqtt_client.on('connect', function () {
-	//Ici, on devrait subscriber sur tous les sensors enregistrés dans la BD
-	//TODO: Ajouter une fonction qui va chercher tous les sensors auxquels subscriber
-	//      dans la base de données.
 	debug("Connecté. Récupération des sensors...");
-	//retrieveSensors(); --> NEED TO DITCH THIS SHIET!
-	mqtt_client.subscribe('1');
+
+	//On va chercher tous les sensors auxquels on doit subscriber dans
+	//la base de données.
+	retrieveSensors(function(topics){
+
+		topics.forEach(function(topic){
+			debug("Subscribing to topic " + topic);
+			mqtt_client.subscribe(topic);
+		});
+
+	});
+
 });
 
-mqtt_client.on('message', function (topic, message) { 
+//Ajouter les messages reçus dans la base de données
+mqtt_client.on('message', function (topic, message) {
 	debug("-------------------\nMessage recu:\nTopic: " + topic + ", Message: " + message);
 	addToDatabase(topic, message);
 	//mqtt_client.end(); //On ne ferme pas le client!
 });
 
+//Gestion des erreurs
 mqtt_client.on('error', function(error) {
 	console.log("Error: " + error);
 	//process.exit(1);
@@ -92,20 +104,22 @@ function debug(msg)
 	if (DEBUG) { console.log(msg); }
 }
 
-function retrieveSensors()
+//Fonction pour aller chercher la liste des sensors auxquels subscriber dans la base de données
+function retrieveSensors(callback)
 {
 	pg_client.connect();
 
 	var query = pg_client.query('select * from sensors');
 	var sensorArray = [];
+
 	query.on('row', function(row) {
-		//console.log(row.id + " : " + row.name);
 		debug(row.id + " - " + row.name + ", is type " + row.type + ", from bucket " + row.bucket_id);
-		sensorArray.push();
+		sensorArray.push(row.id.toString());
 	});
 
 	query.on('end', function() {
 		pg_client.end();
+		callback(sensorArray);
 	});
 
 }
