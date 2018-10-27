@@ -1,0 +1,22 @@
+header {
+    height: 9%;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    animation: slideUp 300ms linear;
+
+    .custom-container{
+        display: flex;
+        align-items: center;
+        display: -webkit-flex;
+        max-width: 70vw;
+        margin: 0 auto;
+        margin-top: -1.8em;
+        padding: 0 32px;
+
+        @media (max-width: 480px) {
+            margin-top: -1em;
+        }
+    }
+}
