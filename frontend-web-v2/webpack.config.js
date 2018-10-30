@@ -19,7 +19,8 @@ module.exports = {
     watchContentBase: true,
     compress: true,
     hot: true,
-    inline: true
+    inline: true,
+    port: 8081
   },
   devtool: 'source-map',
   module: {
