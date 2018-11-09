@@ -7,6 +7,7 @@ import NotFound from './containers/NotFound';
 
 import './styles/main.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import About from './components/About';
 
 export default class App extends Component {
   render() {
@@ -14,6 +15,7 @@ export default class App extends Component {
       <MasterContainer>
         <Switch>
           <Route exact path="/" component={MainPageContainer} />
+          <Route exact path="/about" component={About} />
           <Route path="*" component={NotFound} />
         </Switch>
       </MasterContainer>

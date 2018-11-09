@@ -1,22 +1,32 @@
 header {
-    height: 9%;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 100;
-    animation: slideUp 300ms linear;
+	height: $header-height;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1;
+	background-color: $light-green;
 
-    .custom-container{
-        display: flex;
-        align-items: center;
-        display: -webkit-flex;
-        max-width: 70vw;
-        margin: 0 auto;
-        margin-top: -1.8em;
-        padding: 0 32px;
+	.custom-container {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		max-width: 60vw;
+		margin: 0 auto;
 
-        @media (max-width: 480px) {
-            margin-top: -1em;
-        }
-    }
+		.logo {
+			margin-top: .4em;
+			width: 4em;
+			float: left;
+		}
+
+		.title {
+			font-size: 1.3rem;
+		}
+		
+		.menu {
+			&:hover {
+				cursor: pointer;
+			}
+		}
+	}
 }

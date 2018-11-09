@@ -17,6 +17,7 @@ module.exports = {
   devServer: {
     contentBase: 'public/',
     watchContentBase: true,
+    historyApiFallback: true,
     compress: true,
     hot: true,
     inline: true,
