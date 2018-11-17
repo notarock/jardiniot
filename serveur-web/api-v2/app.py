@@ -15,11 +15,13 @@
 
 from flask_api import FlaskAPI
 from bucket.bucket_blueprint import bucket_blueprint
+from flask_cors import CORS
 
 __name__ = "JardinIoT"
 
 # Initiate Flask application
 app = FlaskAPI(__name__)
+CORS(app)
 
 # Register blueprints, which act as controllers
 app.register_blueprint(bucket_blueprint)
