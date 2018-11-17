@@ -15,10 +15,10 @@ export default class LightToggle extends React.Component {
     return (
       <div className="color">
         <div className="name">
-          {this.state.colorName}
+          {this.state.light.name}
         </div>
         <div>
-          <Slider railStyle={ { ...this.state } } className="slider" />
+          <Slider value={parseInt(this.state.light.value)} max={255} className="slider" />
         </div>
       </div>
     )
