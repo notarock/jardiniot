@@ -18,7 +18,7 @@ export default class LightToggle extends React.Component {
           {this.state.colorName}
         </div>
         <div>
-          <Slider className="slider" />
+          <Slider railStyle={ { ...this.state } } className="slider" />
         </div>
       </div>
     )

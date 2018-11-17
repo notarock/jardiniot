@@ -1,3 +1,5 @@
+$font-size-headers: 2rem;
+
 .main-page {
   display: flex;
   flex-direction: column;
@@ -8,13 +10,11 @@
   .components {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
 
     .first-section {
-
       #temperature {
-
+        font-size: $font-size-headers;
       }
 
       .colors {
@@ -31,49 +31,44 @@
   
           .slider {
             margin-left: 2em;
-            width: 5em;
+            width: 15em;
           }
   
           .name {
   
           }
-  
-        }
-  
-      }
-
-      .second-section {
-
-        #percentage {
-
-        }
-
-        .fans {
-          margin-left: 2em;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-    
-          .fan {
-            display: flex;
-            flex-direction: row;
-            margin-top: 1em;
-    
-            .name {
-    
-            }
-    
-            .switch {
-              margin-left: 1em;
-            }
-    
-          }
         }
       }
     }
 
-  
-  }
+    .second-section {
+      flex-grow: 1;
+      margin-left: 15em;
 
+      #percentage {
+        font-size: $font-size-headers;
+      }
+
+      .fans {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+  
+        .fan {
+          display: flex;
+          flex-direction: row;
+          margin-top: 1em;
+  
+          .name {
+  
+          }
+  
+          .switch {
+            margin-left: 1em;
+          }
+        }
+      }
+    }
+  }
 }
