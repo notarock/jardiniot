@@ -10,4 +10,4 @@ RUN ./setup.sh
 
 RUN pip install paho-mqtt
 
-CMD pipenv run flask run & python3 /app/mqtt/mqttmain.py & python3 /app/mqtt/fakejardin.py
+CMD pipenv run flask run & python3 /app/mqtt/mqttmain.py

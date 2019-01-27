@@ -26,8 +26,8 @@ import sqlite3
 from datetime import datetime, timezone
 
 # Globals
-TOPIC_RECEIVE = "jardin_out"
-TOPIC_SEND = "jardin_in"
+TOPIC_RECEIVE= "status_5ccf7f88bae6"
+TOPIC_SEND = "control_5ccf7f88bae6"
 DBNAME = "database/JardinIoT.db"
 
 # The callback for when the client receives a CONNACK response from the server.
